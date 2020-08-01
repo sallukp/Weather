@@ -7,5 +7,5 @@ interface WeatherService {
 
     @GET("daily")
     suspend fun getWeather(@Query("q") city: String = "Paris",
-                           @Query("cnt") count: Int)
+                           @Query("cnt") count: Int, @Query("appid") appId: String)
 }
