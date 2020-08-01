@@ -1,8 +1,8 @@
-package com.intercom.parisweather.ui.weather
+package com.weather.paris.ui.weather
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.intercom.parisweather.R
+import com.weather.paris.R
 
 class WeatherActivity : AppCompatActivity() {
 

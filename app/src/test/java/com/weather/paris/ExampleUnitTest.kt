@@ -1,4 +1,4 @@
-package com.intercom.parisweather
+package com.weather.paris
 
 import org.junit.Test
 
