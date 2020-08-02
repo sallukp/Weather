@@ -1,4 +1,4 @@
-package com.weather.paris.ui.weather
+package com.weather.paris.ui.weather_list
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import com.weather.paris.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class WeatherActivity : AppCompatActivity() {
+class WeatherListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
