@@ -13,7 +13,6 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class WeatherRepository
-@Inject
 constructor(
     private val weatherService: WeatherService,
     private val weatherDao: WeatherDao,
