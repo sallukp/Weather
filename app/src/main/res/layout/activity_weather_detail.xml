@@ -208,7 +208,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1024hPa"
-                android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pressure_title"/>
@@ -230,7 +229,6 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:text="20"
-                android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="@+id/dew_point_title"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dew_point_title"/>

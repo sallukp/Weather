@@ -59,7 +59,7 @@ class WeatherDetailActivity : AppCompatActivity() {
             dew_point_value.text = weather.dewPoint.toCelsius()
             humidity_value.text = weather.humidity.toPercentage()
             uv_value.text = weather.uvIndex.roundToInt().toString()
-            rain_title.text = weather.rainInfo()
+            rain_value.text = weather.rainInfo()
 
             sunrise_value.text = weather.sunrise.toTime()
             sunset_value.text = weather.sunset.toTime()
