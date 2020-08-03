@@ -49,7 +49,7 @@ class ExtensionTest {
 
     @Test
     fun testToDate() {
-        assertEquals(1596320667L.toDate(), "Sun, Aug 02")
+        assertEquals(1596320667L.toDate(), "Sunday, August 2")
     }
 
     @Test

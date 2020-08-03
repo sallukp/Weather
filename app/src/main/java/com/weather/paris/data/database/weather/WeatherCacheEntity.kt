@@ -73,7 +73,7 @@ data class WeatherCacheEntity(
 
     @NonNull
     @ColumnInfo(name = "uv")
-    var uvIndex: Int,
+    var uvIndex: Float,
 
     @NonNull
     @ColumnInfo(name = "d_p")
@@ -122,7 +122,7 @@ data class WeatherCacheEntity(
         var windDirection: Float = 0f
         var humidity: Float = 0f
         var pressure: Float = 0f
-        var uvIndex: Int = 0
+        var uvIndex: Float = 0f
         var dewPoint: Float = 0f
         lateinit var weatherDescription: String
         lateinit var weatherIcon: String
@@ -214,7 +214,7 @@ data class WeatherCacheEntity(
             return this
         }
 
-        fun setUV(uvIndex: Int): Builder {
+        fun setUV(uvIndex: Float): Builder {
             this.uvIndex = uvIndex
             return this
         }

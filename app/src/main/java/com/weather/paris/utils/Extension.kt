@@ -1,12 +1,13 @@
 package com.weather.paris.utils
 
-import com.weather.paris.utils.Extension.toDate
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
 
 object Extension {
+
+    // Float extensions
 
     fun Float.trimTrailingZero(): String {
         val text = this.toString()
@@ -35,7 +36,7 @@ object Extension {
     // long should be an time stamp in the range of seconds
     fun Long.toDate(): String {
         val date = Date(this * 1000)
-        val dateFormat = SimpleDateFormat("EEE, MMM dd")
+        val dateFormat = SimpleDateFormat("EEEE, MMMM d")
         return dateFormat.format(date)
     }
 

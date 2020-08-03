@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.weather.paris">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -10,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.weather.paris.ui.weather_list.WeatherListActivity">
+        <activity android:name=".ui.weather_detail.WeatherDetailActivity"></activity>
+        <activity android:name=".ui.weather_list.WeatherListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

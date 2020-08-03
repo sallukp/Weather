@@ -19,7 +19,17 @@ constructor(
     private val networkMapper: NetworkMapper,
     private val cacheMapper: CacheMapper) {
 
+    var dailyWeatherList:  List<Weather> = listOf()
+
     suspend fun getWeatherForFiveDays(): Flow<DataState<List<Weather>>> = flow{
+        val lastMidnight = System.currentTimeMillis().toMidnight()
+        val fiveDaysAfterLastMidnight = lastMidnight + 432000000L   // 432000000L = 5*24*60*60*1000
+        // we need the weather forecast only for last 5 days, time stamps is stored in database in seconds
+        val weatherList = weatherDao.getWeather(lastMidnight / 1000, fiveDaysAfterLastMidnight / 1000)
+        if (weatherList.isNotEmpty()) {
+            dailyWeatherList = cacheMapper.mapFromEntities(weatherList)
+            emit(DataState.Success(dailyWeatherList))
+        }
         emit(DataState.Loading)
         try {
             val results = weatherService.getWeather()
@@ -29,24 +39,23 @@ constructor(
             }
             val mutableWeatherList = weatherList.toMutableList()
             val size = mutableWeatherList.size
-            // result has 7 days weather forecast, we only need 5 days
+            // result has 8 days weather forecast, we only need 5 days
             if (size > 5) {
-                for(i in 5..size) {
+                for(i in size - 1 downTo 5) {
                     mutableWeatherList.removeAt(i)
                 }
             }
-            emit(DataState.Success(mutableWeatherList.toList()))
+            dailyWeatherList = mutableWeatherList.toList()
+            emit(DataState.Success(dailyWeatherList))
         } catch (ex: Exception) {
-            val lastMidnight = System.currentTimeMillis().toMidnight()
-            val fiveDaysAfterLastMidnight = lastMidnight + 432000000L   // 432000000L = 5*24*60*60*1000
-            // we need the weather forecast only for last 5 days
-            val weatherList = weatherDao.getWeather(lastMidnight, fiveDaysAfterLastMidnight)
-            when(weatherList.size) {
-                0 -> emit(DataState.Error(ex))
-                else -> {
-                    emit(DataState.Success(cacheMapper.mapFromEntities(weatherList)))
-                }
-            }
+            emit(DataState.Error(ex))
         }
     }
+
+    fun getWeatherDetails(position: Int): Weather? =
+        if (position >= 0 && position < dailyWeatherList.size) {
+            dailyWeatherList[position]
+        } else {
+            null
+        }
 }

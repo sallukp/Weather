@@ -51,7 +51,7 @@ data class WeatherInfoEntity (
 
     // Midday UV index
     @SerializedName("uvi")
-    var uvIndex: Int,
+    var uvIndex: Float,
 
     // Probability of precipitation
     @SerializedName("pop")
