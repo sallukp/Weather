@@ -13,8 +13,8 @@ constructor(): EntityMapper<WeatherInfoEntity, Weather> {
     override fun mapFromEntity(entity: WeatherInfoEntity): Weather {
         val temperatures = Temperatures(entity.temperature.day, entity.temperature.night,
             entity.temperature.morning, entity.temperature.evening)
-        val feelLike = Temperatures(entity.temperature.day, entity.temperature.night,
-            entity.temperature.morning, entity.temperature.evening)
+        val feelLike = Temperatures(entity.feelsLike.day, entity.feelsLike.night,
+            entity.feelsLike.morning, entity.feelsLike.evening)
         return Weather.Builder(entity.index)
             .setDate(entity.date)
             .setTemperatures(temperatures)

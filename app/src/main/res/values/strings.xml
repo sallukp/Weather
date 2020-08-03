@@ -14,4 +14,6 @@
     <string name="rain_title">Rain</string>
     <string name="sunrise_title">Sunrise</string>
     <string name="sunset_title">Sunset</string>
+    <string name="error">Could not update weather.</string>
+    <string name="refresh_title">Refresh</string>
 </resources>

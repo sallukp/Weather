@@ -107,7 +107,7 @@ private constructor(var id: Int) {
         }
 
         fun setSunset(sunset: Long): Builder {
-            this.sunset = sunrise
+            this.sunset = sunset
             return this
         }
 

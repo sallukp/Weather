@@ -2,6 +2,7 @@ package com.weather.paris.ui.weather_detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.RequestManager
@@ -30,12 +31,18 @@ class WeatherDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_detail)
+        supportActionBar?.let { it.setDisplayHomeAsUpEnabled(true) }
         subscribeObservers()
         val position = intent.getIntExtra(Constants.INDEX_KEY, -1)
         if (position > -1) {
             viewModel.setStateEvent(WeatherDetailsViewModel.WeatherDetailStateEvent
                 .GetWeatherDetailsEvent(position))
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) { onBackPressed() }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun subscribeObservers() {

@@ -2,6 +2,13 @@ package com.weather.paris.ui.weather_list
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +39,18 @@ class WeatherListActivity : AppCompatActivity() {
         viewModel.setStateEvent(WeatherListViewModel.WeatherStateEvent.GetWeatherEvent)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_weather_list, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.refresh) {
+            viewModel.setStateEvent(WeatherListViewModel.WeatherStateEvent.RefreshWeatherEvent)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun initRecyclerView() {
         adapter = WeatherRecyclerAdapter(glideRequests)
         val layoutManager = LinearLayoutManager(this,
@@ -44,17 +63,23 @@ class WeatherListActivity : AppCompatActivity() {
         viewModel.dataState.observe(this, Observer {dataState ->
             when(dataState) {
                 is DataState.Success<List<Weather>> -> {
+                    loading(false)
                     adapter.weatherList = dataState.data
                     adapter.notifyDataSetChanged()
                 }
                 is DataState.Loading -> {
-
+                    loading(true)
                 }
                 is DataState.Error -> {
-
+                    loading(false)
+                    Toast.makeText(this, R.string.error, Toast.LENGTH_LONG).show();
                 }
             }
         })
+    }
+
+    private fun loading(display: Boolean) {
+        progress.visibility = if (display) VISIBLE else GONE
     }
 
 
